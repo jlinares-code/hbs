@@ -1,6 +1,6 @@
 <template>
   <section class="animate__animated animate__fadeIn">
-    <h1>🎉 ¡Feliz Cumpleaños, Estrellita! 🎉</h1>
+    <h1>¡Feliz Cumpleaños, Estrellita!</h1>
     <button @click="$emit('verPack')">Abrir mi regalo</button>
   </section>
 </template>
@@ -13,7 +13,7 @@ section {
   align-items: center;
 
   padding: 2rem 1rem;
-  background: #000000;
+  background: #000000cc;
   color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);

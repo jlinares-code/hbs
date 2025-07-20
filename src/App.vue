@@ -1,10 +1,8 @@
 <template>
   <div :class="['app', directionClass]">
     <transition name="slide" mode="out-in">
-      <component :is="currentComponent" :key="currentPage" 
-                 @verPack="nextPage('right')" 
-                 @continuar="nextPage('left')" 
-                 :regalos="regalos" />
+      <component :is="currentComponent" :key="currentPage" @verPack="nextPage('right')" @continuar="nextPage('left')"
+        :regalos="regalos" />
     </transition>
     <div class="background-image" />
   </div>
@@ -48,11 +46,16 @@ export default {
 <style>
 @import 'animate.css';
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   height: 100%;
+}
+
+:root {
+  background: linear-gradient(to bottom, #000000, #1e3a8a);
 }
 
 .app {
@@ -75,9 +78,10 @@ body, html {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('/fondo.png'); /* cambia por tu imagen */
+  background-image: url('/fondo.png');
+  /* cambia por tu imagen */
   background-size: cover;
-  background-position: -80% center;
+  background-position: 20% center;
   background-repeat: no-repeat;
   opacity: 0.1;
   z-index: -1;
@@ -88,6 +92,7 @@ body, html {
   0% {
     transform: translateX(-100%);
   }
+
   /* 50%{
     transform: translateX(100%);
   } */
@@ -95,7 +100,6 @@ body, html {
     transform: translateX(0);
   }
 }
-
 </style>
 
 <!-- /* background: linear-gradient(to bottom, #000000, #1e3a8a); */ -->
