@@ -1,10 +1,19 @@
 <template>
-  <div :class="['app', directionClass]">
+  <div class="app" :class="directionClass">
     <transition name="slide" mode="out-in">
-      <component :is="currentComponent" :key="currentPage" @verPack="nextPage('right')" @continuar="nextPage('left')"
-        :regalos="regalos" />
+      <component
+        :is="currentComponent"
+        :key="currentPage"
+        @verPack="nextPage('right')"
+        @continuar="nextPage('left')"
+        :regalos="regalos"
+      />
     </transition>
-    <div class="background-image" />
+    <div
+      class="background-image"
+      :key="backgroundKey"
+      :style="backgroundStyle"
+    />
   </div>
 </template>
 
@@ -15,29 +24,64 @@ import PackSection from './components/PackSection.vue'
 import MessageSection from './components/MessageSection.vue'
 
 export default {
-  components: { HeroSection, FirstGift, PackSection, MessageSection },
+  components: {
+    HeroSection,
+    FirstGift,
+    PackSection,
+    MessageSection
+  },
   data() {
     return {
       currentPage: 0,
       direction: 'right',
+      backgroundKey: 0, // clave para forzar el re-render del fondo
       regalos: [
         { descripcion: 'Una turbo abuela 👩‍🦳' },
-        { descripcion: 'Unas garritas 😼' }
+        { descripcion: 'Unas garritas 😼, para este perro frio' }
+      ],
+      backgrounds: [
+        '1fondoTest.png',
+        'fondo.png',
+        'fondo3.png',
+        'fondo4.png'
+      ],
+      backgroundAnimations: [
+        'scroll-horizontal-once 0.5s ease-out 1',
+        'scroll-horizontal-once 1s ease-in-out 1',
+        'scroll-horizontal-once 0.7s ease-in 1',
+        'scroll-horizontal-once 0.8s ease-out 1'
       ]
     }
   },
   computed: {
     currentComponent() {
-      return [HeroSection, FirstGift, PackSection, MessageSection][this.currentPage]
+      return [
+        HeroSection,
+        FirstGift,
+        PackSection,
+        MessageSection
+      ][this.currentPage]
     },
     directionClass() {
       return this.direction === 'right' ? 'slide-right' : 'slide-left'
+    },
+    backgroundStyle() {
+      const imageUrl = this.backgrounds[this.currentPage]
+      return {
+        backgroundImage: `url('${imageUrl}')`,
+        animation: this.backgroundAnimations[this.currentPage]
+      }
     }
   },
   methods: {
     nextPage(direction = 'right') {
       this.direction = direction
-      if (this.currentPage < 3) this.currentPage++
+      if (this.currentPage < 3) {
+        this.currentPage++
+
+        // Reiniciar animación del fondo forzando key diferente
+        this.backgroundKey++ // obliga al div a renderizarse de nuevo
+      }
     }
   }
 }
@@ -45,61 +89,55 @@ export default {
 
 <style>
 @import 'animate.css';
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  height: 100%;
-}
-
 :root {
   background: linear-gradient(to bottom, #000000, #1e3a8a);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .app {
   position: relative;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: 'Quicksand', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   padding: 2rem 1rem;
-  /* background-color: #000; Fallback color */
 }
 
-/* Fondo animado solo una vez */
+/* Fondo por página */
 .background-image {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url('/fondo.png');
-  /* cambia por tu imagen */
+  width: 100%;
+  height: 100%;
   background-size: cover;
-  background-position: 20% center;
+  background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.1;
+  opacity: 0.2;
   z-index: -1;
-  animation: scroll-horizontal-once 0.5s ease-out 1;
 }
 
+/* Animación de fondo */
 @keyframes scroll-horizontal-once {
   0% {
     transform: translateX(-100%);
   }
-
-  /* 50%{
-    transform: translateX(100%);
-  } */
   100% {
     transform: translateX(0);
   }
 }
 </style>
+
+
+
 
 <!-- /* background: linear-gradient(to bottom, #000000, #1e3a8a); */ -->

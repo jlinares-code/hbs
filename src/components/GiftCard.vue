@@ -30,7 +30,7 @@ body {
   max-width: 300px;
   height: 90vw;
   max-height: 300px;
-  background: #fff;
+  background: #fff0;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0,0,0,0.2);
   display: flex;
@@ -53,8 +53,8 @@ body {
 }
 
 .reveal {
-  font-size: 0.9rem;
-  color: #000;
+  font-size: 2rem;
+  color: #facc15;
   text-align: center;
   padding: 0.5rem;
   word-wrap: break-word;
