@@ -17,31 +17,46 @@ export default {
 </script>
 
 <style scoped>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+}
+
 .gift-card {
-  width: 100px;
-  height: 100px;
-  background: transparent;
+  width: 90vw;
+  max-width: 300px;
+  height: 90vw;
+  max-height: 300px;
+  background: #fff;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 0.5rem;
+  overflow: hidden;
   transition: transform 0.3s ease;
+  margin: auto;
 }
+
 .gift-card:hover {
   transform: scale(1.05);
 }
-.reveal {
-  font-size: 0.75rem;
-  color: #fff;
-  text-align: center;
-}
-img {
+
+.gift-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  }
+}
+
+.reveal {
+  font-size: 0.9rem;
+  color: #000;
+  text-align: center;
+  padding: 0.5rem;
+  word-wrap: break-word;
+}
 </style>
